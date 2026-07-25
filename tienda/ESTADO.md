@@ -11,11 +11,14 @@
   cada 24h, NO se guarda en el repositorio)
 - Producto existente al conectar: NINGUNO (catálogo vacío) → rama "no hay producto"
 - Última publicación: (pendiente)
+- Tema de trabajo (NO publicado) en Shopify: "s-t-9833 (Claude)" — id #153953042623
+  - Previsualizar: https://s-t-9833.myshopify.com?preview_theme_id=153953042623
+  - Editor: https://s-t-9833.myshopify.com/admin/themes/153953042623/editor
 
 ## Fases completadas
 - [x] 0 Entorno
 - [x] 1 Conexión (tema + Admin API)
-- [x] 2 Proyecto (Dawn descargado)
+- [x] 2 Proyecto (Dawn descargado y subido como tema de trabajo)
 - [ ] 3 Diseño
 - [ ] 4 Construcción
 - [ ] 5 Páginas
