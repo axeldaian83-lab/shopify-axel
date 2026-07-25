@@ -1,75 +1,158 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+    "mt-hero": {
+      "type": "mt-hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "eyebrow": "New · Trending",
+        "headline": "The gadgets everyone is searching for",
+        "body": "Hand-picked viral products with fast shipping to the United States, Canada and Mexico.",
+        "button_text": "Shop now",
+        "button_link": "shopify://collections/all",
+        "button_text_2": "See trending",
+        "button_link_2": "#tendencia",
+        "badge_text": "Best seller",
+        "color_scheme": "dark",
+        "heading_size": 54,
+        "body_size": 18,
+        "padding_top": 0,
+        "padding_bottom": 40
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "mt-trust": {
+      "type": "mt-trust",
+      "blocks": {
+        "envio": { "type": "item", "settings": { "icon": "envio", "texto": "Shipping to the US, Canada & Mexico" } },
+        "seguro": { "type": "item", "settings": { "icon": "seguro", "texto": "100% secure payment" } },
+        "garantia": { "type": "item", "settings": { "icon": "garantia", "texto": "30-day guarantee" } },
+        "soporte": { "type": "item", "settings": { "icon": "soporte", "texto": "Fast customer support" } }
+      },
+      "block_order": ["envio", "seguro", "garantia", "soporte"],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "color_scheme": "soft",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "mt-tendencia": {
+      "type": "mt-tendencia",
+      "settings": {
+        "eyebrow": "This week",
+        "headline": "What everyone is buying right now",
+        "link_text": "Shop all",
+        "coleccion": "all",
+        "cantidad": 4,
+        "columnas": 4,
+        "texto_vacio": "Trending products are landing here very soon. As soon as you add your first product, it will show up automatically in this space.",
+        "heading_size": 36,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "mt-cifras": {
+      "type": "mt-cifras",
+      "blocks": {
+        "c1": { "type": "cifra", "settings": { "numero": 10, "sufijo": "k+", "etiqueta": "Happy customers" } },
+        "c2": { "type": "cifra", "settings": { "numero": 3, "sufijo": "", "etiqueta": "Countries shipped to" } },
+        "c3": { "type": "cifra", "settings": { "numero": 4, "sufijo": ".8/5", "etiqueta": "Average rating" } },
+        "c4": { "type": "cifra", "settings": { "numero": 24, "sufijo": "h", "etiqueta": "Order processing time" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
+      "settings": {
+        "color_scheme": "dark",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "mt-pasos": {
+      "type": "mt-pasos",
+      "blocks": {
+        "p1": { "type": "paso", "settings": { "titulo": "Place your order", "texto": "Pick your favorite product and pay securely in under a minute." } },
+        "p2": { "type": "paso", "settings": { "titulo": "We pack & ship it", "texto": "We process your order fast and notify you as soon as it heads to the US, Canada or Mexico." } },
+        "p3": { "type": "paso", "settings": { "titulo": "Enjoy it at your door", "texto": "Receive it at home and see why everyone is talking about this product." } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "eyebrow": "How it works",
+        "headline": "Order in 3 steps, delivered to your door",
+        "heading_size": 36,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "mt-resenas": {
+      "type": "mt-resenas",
+      "blocks": {
+        "r1": { "type": "resena", "settings": { "nombre": "Ana M.", "estrellas": 5, "texto": "It arrived earlier than expected and the quality exceeded my expectations. Ordering again for sure." } },
+        "r2": { "type": "resena", "settings": { "nombre": "Carlos R.", "estrellas": 5, "texto": "Shipping to Mexico was faster than I thought it would be. Highly recommend." } },
+        "r3": { "type": "resena", "settings": { "nombre": "Jamie T.", "estrellas": 4, "texto": "Great quality for the price, will be ordering again." } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {
+        "eyebrow": "Reviews",
+        "headline": "What people who already bought are saying",
+        "heading_size": 36,
+        "color_scheme": "soft",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "mt-social": {
+      "type": "mt-social",
+      "blocks": {
+        "s1": { "type": "marca", "settings": { "texto": "TikTok" } },
+        "s2": { "type": "marca", "settings": { "texto": "Instagram" } },
+        "s3": { "type": "marca", "settings": { "texto": "YouTube" } },
+        "s4": { "type": "marca", "settings": { "texto": "Facebook" } },
+        "s5": { "type": "marca", "settings": { "texto": "Trending Now" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5"],
+      "settings": {
+        "headline": "As seen on",
+        "color_scheme": "soft",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "mt-faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "f1": { "type": "pregunta", "settings": { "pregunta": "Which countries do you ship to?", "respuesta": "<p>We ship to the United States, Canada and Mexico.</p>" } },
+        "f2": { "type": "pregunta", "settings": { "pregunta": "How long does shipping take?", "respuesta": "<p>Usually between 5 and 10 business days, depending on your location.</p>" } },
+        "f3": { "type": "pregunta", "settings": { "pregunta": "Can I return my order?", "respuesta": "<p>Yes, you have 30 days from delivery to request a return.</p>" } },
+        "f4": { "type": "pregunta", "settings": { "pregunta": "What payment methods do you accept?", "respuesta": "<p>We accept all major cards and secure payment methods available at checkout.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": {
+        "eyebrow": "FAQ",
+        "headline": "Everything you need to know",
+        "heading_size": 36,
+        "color_scheme": "light",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "mt-cta-final": {
+      "type": "mt-cta-final",
+      "settings": {
+        "headline": "Don't miss out on the trend",
+        "body": "Shipping to the United States, Canada and Mexico. Buy today and get it at your door.",
+        "button_text": "Shop now",
+        "button_link": "shopify://collections/all",
+        "heading_size": 42,
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "mt-hero",
+    "mt-trust",
+    "mt-tendencia",
+    "mt-cifras",
+    "mt-pasos",
+    "mt-resenas",
+    "mt-social",
+    "mt-faq",
+    "mt-cta-final"
   ]
 }

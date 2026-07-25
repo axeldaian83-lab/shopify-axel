@@ -1,0 +1,83 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-scripts.js' | asset_url }}" defer></script>
+
+{%- assign mt_bg = 'var(--mt-color-bg)' -%}
+{%- assign mt_dark = false -%}
+{%- if section.settings.color_scheme == 'dark' -%}
+  {%- assign mt_bg = 'var(--mt-color-bg-dark)' -%}
+  {%- assign mt_dark = true -%}
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ mt_bg }};
+  }
+{% endstyle %}
+
+<section class="mt-section mt-faq {% if mt_dark %}mt-section--dark{% endif %}">
+  <div class="mt-container">
+    <div class="mt-tendencia__head mt-reveal" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mt-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.headline }}</h2>
+    </div>
+
+    <div class="mt-faq__list mt-reveal">
+      {%- for block in section.blocks -%}
+        <div class="mt-faq__item" {{ block.shopify_attributes }}>
+          <button type="button" class="mt-faq__q" aria-expanded="false">
+            <span>{{ block.settings.pregunta }}</span>
+            <span class="mt-faq__icon"></span>
+          </button>
+          <div class="mt-faq__a">
+            <div class="mt-faq__a-inner">{{ block.settings.respuesta }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Preguntas frecuentes",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "FAQ" },
+    { "type": "text", "id": "headline", "label": "Título", "default": "Everything you need to know" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 56, "step": 2, "unit": "px", "default": 36 },
+    { "type": "select", "id": "color_scheme", "label": "Fondo",
+      "options": [
+        { "value": "light", "label": "Claro" },
+        { "value": "dark", "label": "Oscuro" }
+      ], "default": "light" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "pregunta",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "How long does shipping take?" },
+        { "type": "richtext", "id": "respuesta", "label": "Respuesta", "default": "<p>Shipping usually takes between 5 and 10 business days to the United States, Canada and Mexico.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Preguntas frecuentes",
+      "blocks": [
+        { "type": "pregunta", "settings": { "pregunta": "¿A qué países envían?", "respuesta": "<p>Enviamos a Estados Unidos, Canadá y México.</p>" } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Cuánto tarda el envío?", "respuesta": "<p>Normalmente entre 5 y 10 días laborables, según tu ubicación.</p>" } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Puedo devolver mi pedido?", "respuesta": "<p>Sí, tienes 30 días desde la recepción para solicitar una devolución.</p>" } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Qué métodos de pago aceptan?", "respuesta": "<p>Aceptamos las principales tarjetas y métodos de pago seguros disponibles en el checkout.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

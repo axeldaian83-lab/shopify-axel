@@ -1,0 +1,90 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+
+{%- assign mt_bg = 'var(--mt-color-bg)' -%}
+{%- assign mt_dark = false -%}
+{%- if section.settings.color_scheme == 'dark' -%}
+  {%- assign mt_bg = 'var(--mt-color-bg-dark)' -%}
+  {%- assign mt_dark = true -%}
+{%- elsif section.settings.color_scheme == 'soft' -%}
+  {%- assign mt_bg = 'var(--mt-color-bg-soft)' -%}
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ mt_bg }};
+  }
+{% endstyle %}
+
+<section class="mt-section mt-trust {% if mt_dark %}mt-section--dark{% endif %}">
+  <div class="mt-container">
+    <div class="mt-trust__row mt-reveal mt-reveal-stagger">
+      {%- for block in section.blocks -%}
+        <div class="mt-trust__item" {{ block.shopify_attributes }}>
+          <span class="mt-trust__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'envio' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="14" height="12"/><path d="M15 10h4l3 3v5h-7z"/><circle cx="6" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg>
+              {%- when 'seguro' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+              {%- when 'garantia' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 17v-5h5"/></svg>
+              {%- when 'soporte' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 1 16 0v5a2 2 0 0 1-2 2h-1v-7h3"/><path d="M4 17v-5h3v7H5a2 2 0 0 1-1-2z"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>
+            {%- endcase -%}
+          </span>
+          <span class="mt-trust__label">{{ block.settings.texto }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Confianza",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "color_scheme", "label": "Fondo",
+      "options": [
+        { "value": "light", "label": "Claro" },
+        { "value": "soft", "label": "Gris suave" },
+        { "value": "dark", "label": "Oscuro" }
+      ], "default": "soft" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Elemento",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icono",
+          "options": [
+            { "value": "envio", "label": "Envío" },
+            { "value": "seguro", "label": "Pago seguro" },
+            { "value": "garantia", "label": "Garantía / devolución" },
+            { "value": "soporte", "label": "Soporte" },
+            { "value": "mundo", "label": "Internacional" }
+          ], "default": "envio" },
+        { "type": "text", "id": "texto", "label": "Texto", "default": "Shipping to the US, Canada & Mexico" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Confianza",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "envio", "texto": "Envío a EE.UU., Canadá y México" } },
+        { "type": "item", "settings": { "icon": "seguro", "texto": "Pago 100% seguro" } },
+        { "type": "item", "settings": { "icon": "garantia", "texto": "Garantía de 30 días" } },
+        { "type": "item", "settings": { "icon": "soporte", "texto": "Atención al cliente rápida" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,68 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+
+{%- assign mt_bg = 'var(--mt-color-bg-soft)' -%}
+{%- assign mt_dark = false -%}
+{%- if section.settings.color_scheme == 'dark' -%}
+  {%- assign mt_bg = 'var(--mt-color-bg-dark)' -%}
+  {%- assign mt_dark = true -%}
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ mt_bg }};
+  }
+{% endstyle %}
+
+<section class="mt-section mt-social {% if mt_dark %}mt-section--dark{% endif %}">
+  {%- if section.settings.headline != blank -%}
+    <p class="mt-eyebrow" style="justify-content:center;display:flex;">{{ section.settings.headline }}</p>
+  {%- endif -%}
+  <div class="mt-social__marquee">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span class="mt-social__item" {% unless forloop.parentloop.first %}aria-hidden="true"{% endunless %}>{{ block.settings.texto }}</span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Visto en redes",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Texto pequeño superior", "default": "As seen on" },
+    { "type": "select", "id": "color_scheme", "label": "Fondo",
+      "options": [
+        { "value": "soft", "label": "Gris suave" },
+        { "value": "dark", "label": "Oscuro" }
+      ], "default": "soft" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "marca",
+      "name": "Nombre",
+      "settings": [
+        { "type": "text", "id": "texto", "label": "Texto (nombre de red o medio)", "default": "TikTok" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Visto en redes",
+      "blocks": [
+        { "type": "marca", "settings": { "texto": "TikTok" } },
+        { "type": "marca", "settings": { "texto": "Instagram" } },
+        { "type": "marca", "settings": { "texto": "YouTube" } },
+        { "type": "marca", "settings": { "texto": "Facebook" } },
+        { "type": "marca", "settings": { "texto": "Trending Now" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

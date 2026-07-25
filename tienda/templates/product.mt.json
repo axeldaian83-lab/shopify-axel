@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "principal": {
+      "type": "mt-producto",
+      "blocks": {
+        "c1": { "type": "caracteristica", "settings": { "titulo": "Proven quality", "texto": "Carefully selected materials so it lasts and works as expected." } },
+        "c2": { "type": "caracteristica", "settings": { "titulo": "Fast shipping", "texto": "We process and ship your order in under 24 hours." } },
+        "c3": { "type": "caracteristica", "settings": { "titulo": "Real support", "texto": "If something goes wrong, there's a real person here to help." } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {
+        "eyebrow": "Trending",
+        "boton_texto": "Add to cart",
+        "boton_agotado": "Sold out",
+        "confianza_1": "Shipping to the US, Canada & Mexico",
+        "confianza_2": "100% secure payment",
+        "confianza_3": "30-day guarantee",
+        "incluye_titulo": "What's included",
+        "incluye": "1x main product\n1x quick-start guide\nProtective packaging for international shipping"
+      }
+    },
+    "resenas": {
+      "type": "mt-resenas",
+      "blocks": {
+        "r1": { "type": "resena", "settings": { "nombre": "Ana M.", "estrellas": 5, "texto": "It arrived earlier than expected and the quality exceeded my expectations. Ordering again for sure." } },
+        "r2": { "type": "resena", "settings": { "nombre": "Carlos R.", "estrellas": 5, "texto": "Shipping to Mexico was faster than I thought it would be. Highly recommend." } },
+        "r3": { "type": "resena", "settings": { "nombre": "Jamie T.", "estrellas": 4, "texto": "Great quality for the price, will be ordering again." } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {
+        "eyebrow": "Reviews",
+        "headline": "What people who already bought are saying",
+        "heading_size": 32,
+        "color_scheme": "soft",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "f1": { "type": "pregunta", "settings": { "pregunta": "Which countries do you ship to?", "respuesta": "<p>We ship to the United States, Canada and Mexico.</p>" } },
+        "f2": { "type": "pregunta", "settings": { "pregunta": "How long does shipping take?", "respuesta": "<p>Usually between 5 and 10 business days, depending on your location.</p>" } },
+        "f3": { "type": "pregunta", "settings": { "pregunta": "Can I return my order?", "respuesta": "<p>Yes, you have 30 days from delivery to request a return.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {
+        "eyebrow": "FAQ",
+        "headline": "Before you buy",
+        "heading_size": 32,
+        "color_scheme": "light",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": ["principal", "resenas", "faq"]
+}

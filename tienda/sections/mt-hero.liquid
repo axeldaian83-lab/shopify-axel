@@ -1,0 +1,84 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-scripts.js' | asset_url }}" defer></script>
+
+{%- assign mt_bg = 'var(--mt-color-bg)' -%}
+{%- if section.settings.color_scheme == 'dark' -%}{%- assign mt_bg = 'var(--mt-color-bg-dark)' -%}{%- endif -%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ mt_bg }};
+  }
+{% endstyle %}
+
+<section class="mt-section mt-hero {% if section.settings.color_scheme == 'dark' %}mt-section--dark{% endif %}">
+  <div class="mt-hero__copy mt-reveal">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="mt-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="mt-h1 mt-hero__title" style="font-size:{{ section.settings.heading_size }}px;">
+      {{ section.settings.headline }}
+    </h1>
+    <p class="mt-body mt-hero__body" style="font-size:{{ section.settings.body_size }}px;">
+      {{ section.settings.body | newline_to_br }}
+    </p>
+    <div class="mt-hero__ctas">
+      <a href="{{ section.settings.button_link | default: '#' }}" class="mt-btn">{{ section.settings.button_text }}</a>
+      {%- if section.settings.button_text_2 != blank -%}
+        <a href="{{ section.settings.button_link_2 | default: '#' }}" class="mt-btn mt-btn--ghost">{{ section.settings.button_text_2 }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="mt-hero__media mt-reveal">
+    <div class="mt-hero__media-frame">
+      {%- if section.settings.imagen != blank -%}
+        <img
+          src="{{ section.settings.imagen | image_url: width: 1200 }}"
+          alt="{{ section.settings.imagen.alt | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          width="{{ section.settings.imagen.width }}"
+          height="{{ section.settings.imagen.height }}">
+      {%- else -%}
+        <div class="mt-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Add your product photo here</span>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.badge_text != blank -%}
+        <span class="mt-hero__badge">{{ section.settings.badge_text }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "New · Trending" },
+    { "type": "text", "id": "headline", "label": "Título", "default": "The gadgets everyone is searching for" },
+    { "type": "textarea", "id": "body", "label": "Texto", "default": "Hand-picked viral products with fast shipping to the United States, Canada and Mexico." },
+    { "type": "text", "id": "button_text", "label": "Texto del botón principal", "default": "Shop now" },
+    { "type": "url", "id": "button_link", "label": "Enlace del botón principal" },
+    { "type": "text", "id": "button_text_2", "label": "Texto del botón secundario (opcional)", "default": "See trending" },
+    { "type": "url", "id": "button_link_2", "label": "Enlace del botón secundario" },
+    { "type": "text", "id": "badge_text", "label": "Texto de la insignia sobre la foto", "default": "Best seller" },
+    { "type": "image_picker", "id": "imagen", "label": "Imagen del producto" },
+    { "type": "header", "content": "Estilo" },
+    { "type": "select", "id": "color_scheme", "label": "Fondo",
+      "options": [
+        { "value": "light", "label": "Claro" },
+        { "value": "dark", "label": "Oscuro" }
+      ], "default": "dark" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 28, "max": 72, "step": 2, "unit": "px", "default": 54 },
+    { "type": "range", "id": "body_size", "label": "Tamaño del texto (px)", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 18 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "MT – Hero" } ]
+}
+{% endschema %}

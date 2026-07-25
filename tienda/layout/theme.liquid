@@ -9,6 +9,9 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      {%- comment -%} Favicon provisional con la inicial de la tienda; se sustituye solo en cuanto el usuario suba su logo en Configuración del tema → Favicon. {%- endcomment -%}
+      <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230E0F13'/%3E%3Ctext x='32' y='42' font-family='Arial, sans-serif' font-size='30' font-weight='800' fill='%23FF5C1A' text-anchor='middle'%3E{{ shop.name | slice: 0, 1 | escape }}%3C/text%3E%3C/svg%3E">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}

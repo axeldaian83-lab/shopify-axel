@@ -1,0 +1,69 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-scripts.js' | asset_url }}" defer></script>
+
+{%- assign mt_bg = 'var(--mt-color-bg-dark)' -%}
+{%- assign mt_dark = true -%}
+{%- if section.settings.color_scheme == 'light' -%}
+  {%- assign mt_bg = 'var(--mt-color-bg)' -%}
+  {%- assign mt_dark = false -%}
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ mt_bg }};
+  }
+{% endstyle %}
+
+<section class="mt-section mt-cifras {% if mt_dark %}mt-section--dark{% endif %}">
+  <div class="mt-container">
+    <div class="mt-cifras__grid mt-reveal mt-reveal-stagger">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          <span class="mt-cifras__num" data-target="{{ block.settings.numero }}" data-suffix="{{ block.settings.sufijo }}">0{{ block.settings.sufijo }}</span>
+          <p class="mt-cifras__label">{{ block.settings.etiqueta }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Cifras",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "color_scheme", "label": "Fondo",
+      "options": [
+        { "value": "dark", "label": "Oscuro" },
+        { "value": "light", "label": "Claro" }
+      ], "default": "dark" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "cifra",
+      "name": "Cifra",
+      "settings": [
+        { "type": "number", "id": "numero", "label": "Número (sin símbolo)", "default": 10 },
+        { "type": "text", "id": "sufijo", "label": "Símbolo después del número (ej: %, k, +)", "default": "k+" },
+        { "type": "text", "id": "etiqueta", "label": "Descripción", "default": "Happy customers" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Cifras",
+      "blocks": [
+        { "type": "cifra", "settings": { "numero": 10, "sufijo": "k+", "etiqueta": "Clientes felices" } },
+        { "type": "cifra", "settings": { "numero": 3, "sufijo": "", "etiqueta": "Países con envío" } },
+        { "type": "cifra", "settings": { "numero": 4, "sufijo": ".8/5", "etiqueta": "Valoración media" } },
+        { "type": "cifra", "settings": { "numero": 24, "sufijo": "h", "etiqueta": "Envío procesado en" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

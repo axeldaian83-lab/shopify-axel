@@ -1,0 +1,102 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-scripts.js' | asset_url }}" defer></script>
+
+{%- assign mt_bg = 'var(--mt-color-bg)' -%}
+{%- assign mt_dark = false -%}
+{%- if section.settings.color_scheme == 'dark' -%}
+  {%- assign mt_bg = 'var(--mt-color-bg-dark)' -%}
+  {%- assign mt_dark = true -%}
+{%- elsif section.settings.color_scheme == 'soft' -%}
+  {%- assign mt_bg = 'var(--mt-color-bg-soft)' -%}
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ mt_bg }};
+  }
+{% endstyle %}
+
+<section class="mt-section mt-resenas {% if mt_dark %}mt-section--dark{% endif %}" data-mt-resenas>
+  <div class="mt-container">
+    <div class="mt-tendencia__head mt-reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mt-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="mt-h2" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.headline }}</h2>
+      </div>
+      <div class="mt-resenas__nav">
+        <button type="button" data-mt-prev aria-label="Previous review">&#8592;</button>
+        <button type="button" data-mt-next aria-label="Next review">&#8594;</button>
+      </div>
+    </div>
+
+    <div class="mt-resenas__track-wrap mt-reveal">
+      <div class="mt-resenas__track">
+        {%- for block in section.blocks -%}
+          <div class="mt-resenas__card" {{ block.shopify_attributes }}>
+            <span class="mt-resenas__stars">
+              {%- for i in (1..5) -%}
+                {%- if i <= block.settings.estrellas -%}&#9733;{%- else -%}&#9734;{%- endif -%}
+              {%- endfor -%}
+            </span>
+            <p class="mt-body">&ldquo;{{ block.settings.texto }}&rdquo;</p>
+            <div class="mt-resenas__autor">
+              <span class="mt-resenas__avatar">
+                {%- if block.settings.foto != blank -%}
+                  <img src="{{ block.settings.foto | image_url: width: 100 }}" alt="{{ block.settings.nombre | escape }}" loading="lazy" width="38" height="38">
+                {%- endif -%}
+              </span>
+              <span class="mt-resenas__nombre">{{ block.settings.nombre }}</span>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Reseñas",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Reviews" },
+    { "type": "text", "id": "headline", "label": "Título", "default": "What people who already bought are saying" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 56, "step": 2, "unit": "px", "default": 36 },
+    { "type": "select", "id": "color_scheme", "label": "Fondo",
+      "options": [
+        { "value": "light", "label": "Claro" },
+        { "value": "soft", "label": "Gris suave" },
+        { "value": "dark", "label": "Oscuro" }
+      ], "default": "soft" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "resena",
+      "name": "Reseña",
+      "settings": [
+        { "type": "image_picker", "id": "foto", "label": "Foto de la persona (opcional)" },
+        { "type": "text", "id": "nombre", "label": "Nombre", "default": "Happy customer" },
+        { "type": "range", "id": "estrellas", "label": "Estrellas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "texto", "label": "Texto de la reseña", "default": "It arrived earlier than expected and the quality exceeded my expectations. Ordering again for sure." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Reseñas",
+      "blocks": [
+        { "type": "resena", "settings": { "nombre": "Ana M.", "estrellas": 5, "texto": "Llegó antes de lo esperado y la calidad superó mis expectativas. Repetiré seguro." } },
+        { "type": "resena", "settings": { "nombre": "Carlos R.", "estrellas": 5, "texto": "El envío a México fue más rápido de lo que pensaba. Muy recomendado." } },
+        { "type": "resena", "settings": { "nombre": "Jamie T.", "estrellas": 4, "texto": "Great quality for the price, will be ordering again." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
