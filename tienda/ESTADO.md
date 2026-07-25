@@ -3,11 +3,14 @@
 - Tienda: s-t-9833.myshopify.com (nombre de marca en Shopify: "S.T.")
 - Carpeta: /home/user/shopify-axel/tienda
 - Tema base: Dawn (descargado 2026-07-25 vía git clone --depth 1)
-- Tema publicado actualmente en la tienda: "Horizon" [live] — id #153936953535 (sin tocar)
-- Tema de trabajo (NO publicado, es el que llevamos todos los cambios):
-  "s-t-9833 (Claude)" — id #153953042623
-  - Previsualizar: https://s-t-9833.myshopify.com?preview_theme_id=153953042623
+- **Tema PUBLICADO (live) desde 2026-07-25**: "s-t-9833 (Claude)" — id
+  #153953042623. El usuario lo publicó él mismo desde el panel. A partir de
+  ahora, cualquier `shopify theme push` a este ID necesita `--allow-live` y es
+  visible al instante para los visitantes reales.
+  - Web pública: https://s-t-9833.myshopify.com
   - Editor: https://s-t-9833.myshopify.com/admin/themes/153953042623/editor
+- "Horizon" (id #153936953535) quedó guardado como tema NO publicado, de
+  respaldo por si el usuario quiere volver atrás.
 - Entorno: Node v22.22.2, Shopify CLI 4.5.2 — OK
 - Conexión Admin API: OK vía client credentials grant (app propia creada por el
   usuario en Dev Dashboard, scopes write_products+write_files, que incluyen
