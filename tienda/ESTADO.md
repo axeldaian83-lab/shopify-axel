@@ -18,12 +18,23 @@
   caduca a las 24h y se regenera con el client_id/client_secret (tampoco
   guardados en el repo). Si una llamada futura da 401, repetir el intercambio
   client_credentials contra /admin/oauth/access_token.
-- Producto en catálogo: NINGUNO todavía → construimos la página de producto y
-  la dejamos lista para asignarse en cuanto el usuario cree su primer producto.
-- Moneda de la tienda: **MXN** (pesos mexicanos) — el usuario pidió vender a
-  EE.UU./Canadá/México; esto es un ajuste de Shopify (Configuración → General
-  → Moneda de la tienda / mercados), no algo que se cambie desde el tema. Está
-  pendiente de decisión del usuario, se le informa en el mensaje de cierre.
+- **Primer producto importado y ya configurado** (2026-07-26): "Portable
+  Wireless Car Vacuum Cleaner" (antes con título largo de proveedor) —
+  gid://shopify/Product/8520477933759, importado por el usuario con una app de
+  dropshipping (CJdropshipping). Vía Admin API:
+  - `templateSuffix: "mt"` asignado → ya usa la página de producto propia.
+  - Título y `descriptionHtml` reescritos (antes era texto de proveedor con
+    especificaciones desordenadas e imágenes incrustadas).
+  - 9 fotos y 4 variantes (Color: 7903black/7903white/A black/A white; la
+    opción "style" solo tenía un valor "Wireless" → se ocultó su selector en
+    `mt-producto.liquid` para no mostrar una elección vacía).
+  - Precios ya vienen del catálogo real (599 / 449 según variante).
+  - Aparece automáticamente en la sección "Tendencia" de la portada (colección
+    "all").
+- Moneda de la tienda: **MXN** (pesos mexicanos) como moneda base, con 3
+  mercados ya configurados por el usuario mostrando moneda local (EE.UU. USD,
+  Canadá CAD, México MXN) — confirmado funcionando en el selector del pie de
+  página. Resuelto, ya no está pendiente.
 
 ## Fases completadas
 - [x] 0 Entorno

@@ -59,7 +59,7 @@
 
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
-            <div class="mt-producto__opcion">
+            <div class="mt-producto__opcion" {% if option.values.size == 1 %}style="display:none;"{% endif %}>
               <label class="mt-producto__opcion-label">{{ option.name }}</label>
               <div class="mt-producto__pills" data-mt-option="{{ option.position }}">
                 {%- for value in option.values -%}
