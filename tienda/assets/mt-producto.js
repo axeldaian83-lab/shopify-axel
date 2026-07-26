@@ -28,10 +28,11 @@ function initVariantes() {
   if (!variantsScript) return;
 
   var variants = JSON.parse(variantsScript.textContent);
+  var scope = form.closest('.mt-producto__compra') || form;
   var optionGroups = form.querySelectorAll('[data-mt-option]');
   var variantIdInput = form.querySelector('[data-mt-variant-id]');
-  var priceEl = form.querySelector('[data-mt-price]');
-  var comparePriceEl = form.querySelector('[data-mt-compare-price]');
+  var priceEl = scope.querySelector('[data-mt-price]');
+  var comparePriceEl = scope.querySelector('[data-mt-compare-price]');
   var addButton = form.querySelector('[data-mt-add-button]');
   var addText = form.querySelector('[data-mt-add-text]');
 
