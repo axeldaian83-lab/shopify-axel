@@ -14,7 +14,7 @@
         "nav": {
           "type": "link_list",
           "settings": {
-            "heading": "Links",
+            "heading": "Enlaces",
             "menu": "footer"
           }
         }
@@ -23,11 +23,11 @@
       "settings": {
         "color_scheme": "scheme-4",
         "newsletter_enable": false,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "Suscríbete a nuestras novedades",
         "enable_follow_on_shop": false,
         "show_social": true,
         "enable_country_selector": true,
-        "enable_language_selector": false,
+        "enable_language_selector": true,
         "payment_enable": true,
         "show_policy": true,
         "margin_top": 0,

@@ -12,12 +12,40 @@
 - "Horizon" (id #153936953535) quedó guardado como tema NO publicado, de
   respaldo por si el usuario quiere volver atrás.
 - Entorno: Node v22.22.2, Shopify CLI 4.5.2 — OK
-- Conexión Admin API: OK vía client credentials grant (app propia creada por el
-  usuario en Dev Dashboard, scopes write_products+write_files, que incluyen
-  lectura). El access token (shpat_...) vive solo en el entorno de trabajo,
-  caduca a las 24h y se regenera con el client_id/client_secret (tampoco
-  guardados en el repo). Si una llamada futura da 401, repetir el intercambio
-  client_credentials contra /admin/oauth/access_token.
+- Conexión Admin API: OK vía client credentials grant. La app (creada por el
+  usuario en Dev Dashboard) tiene 5 scopes: write_products, write_files,
+  write_markets, write_locales, write_translations (todos incluyen lectura).
+  IMPORTANTE (aprendido esta sesión): en este sistema de Shopify, añadir
+  scopes nuevos a una app YA instalada y "publicar una nueva versión" NO los
+  aplica de forma fiable — hubo que **desinstalar y reinstalar** la app para
+  que los scopes nuevos surtieran efecto. Si en el futuro hace falta un scope
+  más, ese es el camino que funciona (no perder tiempo solo con "nueva
+  versión"). El access token (shpat_...) vive solo en el entorno de trabajo,
+  caduca a las 24h y se regenera con el mismo client_id/client_secret
+  (tampoco guardados en el repo). Si una llamada futura da 401, repetir el
+  intercambio client_credentials contra /admin/oauth/access_token.
+- **Tienda multi-idioma y multi-mercado, funcionando de extremo a extremo**
+  (2026-07-26): español (idioma principal, dominio raíz) + inglés (segundo
+  idioma, publicado). 3 mercados con presencia web propia:
+  - México → dominio raíz, sin sufijo, español, MXN (mercado por defecto).
+  - Estados Unidos → `/en-us/`, inglés, USD — MarketWebPresence
+    gid://shopify/MarketWebPresence/47662006463.
+  - Canadá → `/en-ca/`, inglés, CAD — MarketWebPresence
+    gid://shopify/MarketWebPresence/47661973695.
+  Todo el contenido propio (9 secciones de portada, página de producto,
+  footer) y el título/descripción del producto están escritos en español
+  como idioma base y traducidos al inglés vía la Admin API
+  (`translationsRegister`, resourceType `ONLINE_STORE_THEME` para el tema y
+  `PRODUCT` para el catálogo). Verificado con curl en las 3 rutas: idioma,
+  moneda y precio convertido correctos en cada una.
+  - Pendiente menor: los `default` de los ajustes de cada sección (el texto
+    que sale si el usuario añade un bloque nuevo desde cero en el editor)
+    siguen en inglés — no afecta a nada de lo ya publicado, solo a bloques
+    nuevos que el usuario cree manualmente. Se puede traducir si hace falta.
+  - Si se edita CUALQUIER texto propio desde el editor de Shopify en el
+    futuro, hay que recordar volver a registrar su traducción al inglés con
+    `translationsRegister` (si no, ese texto en concreto se verá en español
+    también en `/en-us/` y `/en-ca/` hasta que se traduzca).
 - **Primer producto importado y ya configurado** (2026-07-26): "Portable
   Wireless Car Vacuum Cleaner" (antes con título largo de proveedor) —
   gid://shopify/Product/8520477933759, importado por el usuario con una app de
@@ -48,10 +76,11 @@
 ## Decisiones de diseño
 - Nicho: tienda de gadgets/productos de tendencia (estilo "trending products"),
   sin producto propio subido todavía.
-- Mercado: Estados Unidos, Canadá y México → **idioma de la tienda: inglés**
-  (mercado principal EE.UU./Canadá; los ajustes del editor están en español
-  para que el usuario los entienda, pero los textos que ve el cliente final
-  están en inglés). Si el usuario prefiere español, se puede traducir todo.
+- Mercado: Estados Unidos, Canadá y México → **por idioma real de la tienda,
+  español** (idioma principal de la tienda) **con inglés como segundo idioma
+  para EE.UU./Canadá** (ver detalle de mercados e idiomas arriba). Decisión
+  final tomada a petición explícita del usuario tras detectar que el idioma
+  de Shopify (español) y el de las secciones (antes en inglés) no coincidían.
 - Color: naranja (#FF5C1A) como acento/CTA, sobre fondo blanco/negro
   (#0E0F13) alternando por sección para dar contraste y energía.
 - Tipografía: Archivo Bold (`archivo_n7`) para títulos, Assistant para cuerpo
