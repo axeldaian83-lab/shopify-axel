@@ -58,7 +58,11 @@
      Sanitizer") — gid://shopify/Product/8520956903615. 15 fotos, 14 variantes
      de aroma (opción "Style"), todas a 199. La opción "Net Content" solo
      tenía un valor ("45ml") → también oculta automáticamente.
-  Ambos importados por el usuario con una app de dropshipping
+  3. **"Vaso Termo Gigante de Acero Inoxidable 40oz"** (EN: "Giant Stainless
+     Steel Tumbler 40oz") — gid://shopify/Product/8522218504383. 17 fotos, 13
+     variantes (Color × capacidad 30oz/40oz), todas a $499. Ambas opciones
+     tienen varios valores → los dos selectores se ven normal (sin ocultar).
+  Los tres importados por el usuario con una app de dropshipping
   (CJdropshipping). Regla general aplicada: cualquier opción de variante con
   un solo valor posible se oculta sola (patrón ya resuelto en el código, no
   hace falta tocarlo para futuros productos).
