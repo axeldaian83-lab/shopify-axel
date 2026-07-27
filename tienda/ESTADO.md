@@ -46,26 +46,47 @@
     futuro, hay que recordar volver a registrar su traducción al inglés con
     `translationsRegister` (si no, ese texto en concreto se verá en español
     también en `/en-us/` y `/en-ca/` hasta que se traduzca).
-- **Productos importados y ya configurados** (título/descripción en español
-  como base + traducción al inglés registrada, `templateSuffix: "mt"`
-  asignado, aparecen solos en "Tendencia" de la portada — colección "all"):
+- **Productos activos hoy** (título/descripción en español como base +
+  traducción al inglés registrada, plantilla asignada, aparecen solos en la
+  portada y en "También te puede interesar" — colección "all"). Estado al
+  2026-07-27, después de borrar 2 productos de la primera tanda y añadir 2
+  nuevos:
   1. **"Aspiradora Inalámbrica Portátil para Auto"** (EN: "Portable Wireless
-     Car Vacuum Cleaner") — gid://shopify/Product/8520477933759. 9 fotos, 4
-     variantes de color (7903black/7903white/A black/A white; precios reales
-     449/599 según variante). La opción "style" solo tenía un valor
-     ("Wireless") → oculta automáticamente en `mt-producto.liquid`.
-  2. **"Gel Antibacterial de Bolsillo en Spray"** (EN: "Portable Spray Hand
-     Sanitizer") — gid://shopify/Product/8520956903615. 15 fotos, 14 variantes
-     de aroma (opción "Style"), todas a 199. La opción "Net Content" solo
-     tenía un valor ("45ml") → también oculta automáticamente.
-  3. **"Vaso Termo Gigante de Acero Inoxidable 40oz"** (EN: "Giant Stainless
-     Steel Tumbler 40oz") — gid://shopify/Product/8522218504383. 17 fotos, 13
-     variantes (Color × capacidad 30oz/40oz), todas a $499. Ambas opciones
-     tienen varios valores → los dos selectores se ven normal (sin ocultar).
-  Los tres importados por el usuario con una app de dropshipping
-  (CJdropshipping). Regla general aplicada: cualquier opción de variante con
-  un solo valor posible se oculta sola (patrón ya resuelto en el código, no
-  hace falta tocarlo para futuros productos).
+     Car Vacuum Cleaner") — gid://shopify/Product/8520477933759,
+     `templateSuffix: "mt"`. 9 fotos, 4 variantes de color
+     (7903black/7903white/A black/A white). **Importante**: estos 4 valores
+     en realidad son DOS diseños de aspiradora distintos que el proveedor
+     metió como si fueran solo colores (7903black/white = $599, A black/white
+     = $449). El selector ahora muestra foto + precio de cada uno para que se
+     note la diferencia (ver "Actualización 2026-07-27 (3)"). La opción
+     "style" solo tenía un valor ("Wireless") → oculta sola.
+  2. **"Báscula Digital de Precisión en Forma de Cuchara"** (EN: "Precision
+     Digital Spoon Scale") — gid://shopify/Product/8522958471359,
+     `templateSuffix: "mt-bascula"`. 2 variantes de color (Light green $189 /
+     White $199), cada una con su propia foto en el selector. Opción "style"
+     con un solo valor ("500g 0.1g") → oculta sola. Pesa hasta 500g con 0.1g
+     de precisión, usa pila CR-2032 (no se afirma que la pila venga incluida
+     porque el proveedor no lo confirma en su lista de contenido).
+  3. **"Mini Ventilador Portátil con Pinza"** (EN: "Mini Portable Clip Fan")
+     — gid://shopify/Product/8523018436799, `templateSuffix: "mt-ventilador"`.
+     4 variantes (Color Green/White × cantidad 1PCS/2PCS; $499 la unidad,
+     $649 el par). Batería recargable 900mAh vía USB-C, hasta 5h de uso.
+  Todos importados por el usuario con la app CJdropshipping. Regla general
+  aplicada: cualquier opción de variante con un solo valor posible se oculta
+  sola (patrón ya resuelto en el código, no hace falta tocarlo para futuros
+  productos).
+- **Una plantilla de producto por cada "familia" de producto** (no una sola
+  compartida): `templates/product.mt.json` (aspiradora),
+  `templates/product.mt-bascula.json` (báscula),
+  `templates/product.mt-ventilador.json` (ventilador). Los tres usan las
+  mismas secciones (`mt-producto`, `mt-faq`, `mt-recomendados`) pero cada uno
+  con su propio texto de "Qué incluye" y características — **necesario**
+  porque una sola plantilla compartida por varios productos mostraría el
+  mismo texto en todos (por ejemplo, "incluye aspiradora" en la página de la
+  báscula), lo cual sería información falsa. Para el próximo producto nuevo:
+  copiar uno de estos 3 archivos, darle un nombre de sufijo nuevo (ej.
+  `product.mt-<algo>.json`), ajustar el texto de "incluye" y las
+  características, y asignar ese sufijo al producto con `productUpdate`.
 - Moneda de la tienda: **MXN** (pesos mexicanos) como moneda base, con 3
   mercados ya configurados por el usuario mostrando moneda local (EE.UU. USD,
   Canadá CAD, México MXN) — confirmado funcionando en el selector del pie de
@@ -195,6 +216,31 @@ cuesta menos, separando las fotos"):
   los mismos valores de opción que trae el proveedor ("7903black", "A
   black", etc.), solo se les añadió la foto y el precio para que se
   entiendan mejor.
+
+## Actualización 2026-07-27 (4) — 2 productos nuevos importados
+El usuario importó dos productos nuevos desde CJdropshipping (después de que
+un primer intento fallara con "List Failed" en la app — resultó ser un
+mensaje de esa app, no de Shopify; ambos productos sí llegaron bien a
+Shopify). Para cada uno se hizo el mismo trabajo que con la aspiradora:
+- **Báscula digital en forma de cuchara** y **mini ventilador con pinza**:
+  título y descripción reescritos en español (solo con datos confirmados por
+  el proveedor — ver el listado de productos activos más arriba), traducidos
+  al inglés, plantilla propia creada y asignada
+  (`product.mt-bascula.json` / `product.mt-ventilador.json`, ver nota sobre
+  "una plantilla por familia" más arriba).
+- Al asignar el selector de opciones con foto (la mejora de la actualización
+  anterior), la báscula mostró sola su selector de color con foto y precio
+  por variante sin tocar código — confirma que ese patrón quedó reutilizable.
+- Con 3 productos en la tienda, la vitrina del hero y la sección "También te
+  puede interesar" (antes vacías o con un solo elemento) ya muestran los
+  otros productos de verdad. Nota: justo después de crear un producto nuevo,
+  la colección automática "all" puede tardar unos ~30 segundos en
+  "indexarlo" — si una sección que usa `coleccion: "all"` no muestra un
+  producto recién creado, esperar medio minuto y volver a revisar antes de
+  asumir que algo está roto.
+- Verificado con curl: ambas páginas de producto cargan sin errores de
+  Liquid, precio y "qué incluye" correctos en español e inglés, y la
+  portada/recomendados muestran los 3 productos.
 
 ## Fases completadas
 - [x] 0 Entorno

@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "principal": {
+      "type": "mt-producto",
+      "blocks": {
+        "c1": { "type": "caracteristica", "settings": { "titulo": "Batería recargable", "texto": "900mAh con carga por USB tipo C, hasta 5 horas de uso continuo." } },
+        "c2": { "type": "caracteristica", "settings": { "titulo": "Envío internacional", "texto": "Enviamos a Estados Unidos, Canadá y México con seguimiento incluido." } },
+        "c3": { "type": "caracteristica", "settings": { "titulo": "Soporte real", "texto": "Si algo no va bien, tienes a alguien real para ayudarte." } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {
+        "eyebrow": "Tendencia",
+        "boton_texto": "Añadir al carrito",
+        "boton_agotado": "Agotado",
+        "confianza_1": "Envío a EE.UU., Canadá y México",
+        "confianza_2": "Pago 100% seguro",
+        "confianza_3": "Garantía de 30 días",
+        "incluye_titulo": "Qué incluye",
+        "incluye": "1x ventilador portátil (2x si eliges la opción de 2 piezas)"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "f1": { "type": "pregunta", "settings": { "pregunta": "¿A qué países envían?", "respuesta": "<p>Enviamos a Estados Unidos, Canadá y México.</p>" } },
+        "f2": { "type": "pregunta", "settings": { "pregunta": "¿Cuánto tarda el envío?", "respuesta": "<p>Normalmente entre 5 y 10 días laborables, según tu ubicación.</p>" } },
+        "f3": { "type": "pregunta", "settings": { "pregunta": "¿Puedo devolver mi pedido?", "respuesta": "<p>Sí, tienes 30 días desde la recepción para solicitar una devolución.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {
+        "eyebrow": "Dudas frecuentes",
+        "headline": "Antes de comprar",
+        "heading_size": 32,
+        "color_scheme": "light",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "recomendados": {
+      "type": "mt-recomendados",
+      "settings": {
+        "eyebrow": "También te puede interesar",
+        "headline": "Más de nuestra tienda",
+        "coleccion": "all",
+        "cantidad": 4,
+        "columnas": 4,
+        "heading_size": 32,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": ["principal", "faq", "recomendados"]
+}
