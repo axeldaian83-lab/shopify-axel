@@ -49,8 +49,7 @@
 - **Productos activos hoy** (título/descripción en español como base +
   traducción al inglés registrada, plantilla asignada, aparecen solos en la
   portada y en "También te puede interesar" — colección "all"). Estado al
-  2026-07-27, después de borrar 2 productos de la primera tanda y añadir 2
-  nuevos:
+  2026-07-27, después de varias rondas de borrar/añadir productos:
   1. **"Aspiradora Inalámbrica Portátil para Auto"** (EN: "Portable Wireless
      Car Vacuum Cleaner") — gid://shopify/Product/8520477933759,
      `templateSuffix: "mt"`. 9 fotos, 4 variantes de color
@@ -67,24 +66,23 @@
      con un solo valor ("500g 0.1g") → oculta sola. Pesa hasta 500g con 0.1g
      de precisión, usa pila CR-2032 (no se afirma que la pila venga incluida
      porque el proveedor no lo confirma en su lista de contenido).
-  3. **"Mini Ventilador Portátil con Pinza"** (EN: "Mini Portable Clip Fan")
-     — gid://shopify/Product/8523018436799, `templateSuffix: "mt-ventilador"`.
-     4 variantes (Color Green/White × cantidad 1PCS/2PCS; $499 la unidad,
-     $649 el par). Batería recargable 900mAh vía USB-C, hasta 5h de uso.
+  El **"Mini Ventilador Portátil con Pinza"** (gid://shopify/Product/8523018436799)
+  se importó y se dejó listo el 2026-07-27, pero el usuario pidió borrarlo el
+  mismo día — ya no existe en la tienda ni en el repo (se borró también
+  `templates/product.mt-ventilador.json`, que había quedado sin usar).
   Todos importados por el usuario con la app CJdropshipping. Regla general
   aplicada: cualquier opción de variante con un solo valor posible se oculta
   sola (patrón ya resuelto en el código, no hace falta tocarlo para futuros
   productos).
 - **Una plantilla de producto por cada "familia" de producto** (no una sola
   compartida): `templates/product.mt.json` (aspiradora),
-  `templates/product.mt-bascula.json` (báscula),
-  `templates/product.mt-ventilador.json` (ventilador). Los tres usan las
-  mismas secciones (`mt-producto`, `mt-faq`, `mt-recomendados`) pero cada uno
-  con su propio texto de "Qué incluye" y características — **necesario**
-  porque una sola plantilla compartida por varios productos mostraría el
-  mismo texto en todos (por ejemplo, "incluye aspiradora" en la página de la
-  báscula), lo cual sería información falsa. Para el próximo producto nuevo:
-  copiar uno de estos 3 archivos, darle un nombre de sufijo nuevo (ej.
+  `templates/product.mt-bascula.json` (báscula). Usan las mismas secciones
+  (`mt-producto`, `mt-faq`, `mt-recomendados`) pero cada uno con su propio
+  texto de "Qué incluye" y características — **necesario** porque una sola
+  plantilla compartida por varios productos mostraría el mismo texto en
+  todos (por ejemplo, "incluye aspiradora" en la página de la báscula), lo
+  cual sería información falsa. Para el próximo producto nuevo: copiar uno de
+  estos archivos, darle un nombre de sufijo nuevo (ej.
   `product.mt-<algo>.json`), ajustar el texto de "incluye" y las
   características, y asignar ese sufijo al producto con `productUpdate`.
 - Moneda de la tienda: **MXN** (pesos mexicanos) como moneda base, con 3
@@ -241,6 +239,19 @@ Shopify). Para cada uno se hizo el mismo trabajo que con la aspiradora:
 - Verificado con curl: ambas páginas de producto cargan sin errores de
   Liquid, precio y "qué incluye" correctos en español e inglés, y la
   portada/recomendados muestran los 3 productos.
+
+## Actualización 2026-07-27 (5) — se borró el mini ventilador
+A petición del usuario ("borra los ventiladores"), se borró de Shopify el
+producto "Mini Ventilador Portátil con Pinza" (`productDelete`) y se eliminó
+del repo su plantilla `templates/product.mt-ventilador.json` (ya sin
+producto que la usara). Se hizo un `theme push` completo (sin `--only`) para
+que Shopify borrara también ese archivo del lado remoto — a diferencia de un
+push parcial, el push completo sincroniza borrados. Verificado con curl:
+la página del ventilador da 404, y la portada + "también te puede
+interesar" vuelven a mostrar solo los 2 productos restantes (aspiradora y
+báscula) sin errores. Igual que con la creación de productos, el cambio en
+la colección "all" tardó unos ~30 segundos en reflejarse en las secciones
+que la usan.
 
 ## Fases completadas
 - [x] 0 Entorno
