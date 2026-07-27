@@ -129,6 +129,45 @@ engañosa"):
      `assets/mt-producto.js` para buscar el precio dentro del bloque de
      compra completo, no solo dentro del formulario.
 
+## Actualización 2026-07-27 (2) — vitrina de recomendados en el hero
+A petición del usuario ("quites la parte de más vendido... y ahí pongas una
+imagen de recomendados y poner los productos en tienda"):
+- En `sections/mt-hero.liquid`, la insignia "Más vendida" sobre la foto del
+  producto se quitó por completo (era una afirmación no verificable con un
+  solo producto en la tienda). En su lugar, esa misma zona (la primera imagen
+  que ve el visitante) ahora es una **pequeña vitrina de productos
+  recomendados**: tarjetas reales con foto, nombre y precio, sacadas
+  directamente de la colección "all" de la tienda (no inventadas). Hoy se ve
+  la aspiradora; en cuanto haya más productos, aparecerán solos ahí también
+  (hasta 3, configurable desde el editor).
+  - Ajustes nuevos en el editor: "Texto pequeño sobre la vitrina" (por
+    defecto "Recomendados"/"Recommended"), "Colección de la que mostrar
+    productos" y "Número de productos a mostrar".
+  - Se quitaron los ajustes viejos `badge_text` e `imagen` (ya no se usan) y
+    su CSS asociado (`mt-hero__badge`, `mt-hero__media-frame`) en
+    `assets/mt-styles.css`, sustituido por `mt-hero__showcase*`.
+  - Traducción al inglés del nuevo texto ("Recomendados" → "Recommended")
+    registrada vía `translationsRegister`. Verificado con curl en español y
+    en `/en-us/`: la tarjeta de producto, el idioma y el precio convertido
+    salen correctos en ambos.
+  - **Nota técnica para el futuro**: al subir en la MISMA tanda un cambio de
+    esquema de sección (nuevos ajustes) y la plantilla JSON que usa esos
+    ajustes, Shopify puede validar el JSON contra una versión cacheada
+    todavía vieja del esquema y descartar en silencio los campos nuevos (sin
+    dar ningún error). La forma fiable de evitarlo: subir primero el archivo
+    `.liquid` de la sección (con su nuevo `{% schema %}`) en un `theme push`
+    aparte, esperar a que termine, y DESPUÉS subir el `templates/*.json` que
+    usa esos ajustes nuevos en un segundo `theme push`. Conviene además
+    verificar con `shopify theme pull --only <archivo>` que los ajustes
+    nuevos quedaron guardados de verdad antes de dar el cambio por bueno.
+- **Revisado si había productos nuevos por importar**: se consultó el listado
+  completo de productos de la tienda (cualquier estado) y solo sigue
+  existiendo la aspiradora — no ha llegado ningún producto nuevo todavía. Si
+  el usuario ya inició una importación desde su app de dropshipping
+  (CJdropshipping), probablemente falta completar el paso de "enviar/subir a
+  la tienda" desde esa misma app; en cuanto el producto aparezca en Shopify,
+  avisar para pulirlo y traducirlo igual que los anteriores.
+
 ## Fases completadas
 - [x] 0 Entorno
 - [x] 1 Conexión (tema + Admin API) y sondeo de producto (no había ninguno)
