@@ -66,6 +66,14 @@
      con un solo valor ("500g 0.1g") → oculta sola. Pesa hasta 500g con 0.1g
      de precisión, usa pila CR-2032 (no se afirma que la pila venga incluida
      porque el proveedor no lo confirma en su lista de contenido).
+  3. **"Mini Aspiradora Portátil de Escritorio"** (EN: "Portable Mini Desktop
+     Vacuum Cleaner") — gid://shopify/Product/8523074404543,
+     `templateSuffix: "mt-mini-aspiradora"`. Distinta a la aspiradora para
+     auto (más pequeña, de escritorio, $349, batería 1400mAh recargable por
+     USB, ~90 min de uso). Única variante ("White") → el selector de color se
+     oculta solo por tener un solo valor. No traía lista de contenido del
+     paquete en la ficha del proveedor, así que "incluye" solo dice "1x mini
+     aspiradora portátil" (lo único confirmado por el título del producto).
   El **"Mini Ventilador Portátil con Pinza"** (gid://shopify/Product/8523018436799)
   se importó y se dejó listo el 2026-07-27, pero el usuario pidió borrarlo el
   mismo día — ya no existe en la tienda ni en el repo (se borró también
@@ -75,8 +83,10 @@
   sola (patrón ya resuelto en el código, no hace falta tocarlo para futuros
   productos).
 - **Una plantilla de producto por cada "familia" de producto** (no una sola
-  compartida): `templates/product.mt.json` (aspiradora),
-  `templates/product.mt-bascula.json` (báscula). Usan las mismas secciones
+  compartida): `templates/product.mt.json` (aspiradora de auto),
+  `templates/product.mt-bascula.json` (báscula),
+  `templates/product.mt-mini-aspiradora.json` (mini aspiradora de
+  escritorio). Usan las mismas secciones
   (`mt-producto`, `mt-faq`, `mt-recomendados`) pero cada uno con su propio
   texto de "Qué incluye" y características — **necesario** porque una sola
   plantilla compartida por varios productos mostraría el mismo texto en
@@ -252,6 +262,19 @@ interesar" vuelven a mostrar solo los 2 productos restantes (aspiradora y
 báscula) sin errores. Igual que con la creación de productos, el cambio en
 la colección "all" tardó unos ~30 segundos en reflejarse en las secciones
 que la usan.
+
+## Actualización 2026-07-27 (6) — mini aspiradora de escritorio importada
+Llegó un tercer producto desde CJdropshipping: "Portable mini vacuum
+cleaner", una mini aspiradora de escritorio (distinta a la aspiradora para
+auto — más chica, $349, batería 1400mAh recargable por USB, ~90 min de uso).
+Mismo tratamiento que los productos anteriores: título y descripción
+reescritos en español con solo los datos confirmados por el proveedor
+(la ficha no incluía lista de contenido del paquete, así que "incluye" solo
+dice "1x mini aspiradora portátil"), traducido al inglés, plantilla propia
+`product.mt-mini-aspiradora.json` creada y asignada. Verificado con curl:
+sin errores de Liquid, precio y "qué incluye" correctos en español e inglés,
+opción de color oculta sola (un solo valor), y ya aparece junto a los otros
+2 productos en la portada y en "también te puede interesar".
 
 ## Fases completadas
 - [x] 0 Entorno
