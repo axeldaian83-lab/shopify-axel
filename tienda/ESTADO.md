@@ -168,6 +168,34 @@ imagen de recomendados y poner los productos en tienda"):
   la tienda" desde esa misma app; en cuanto el producto aparezca en Shopify,
   avisar para pulirlo y traducirlo igual que los anteriores.
 
+## Actualización 2026-07-27 (3) — selector de variantes con foto y precio
+Se descubrió que la aspiradora en realidad son **dos diseños físicos
+distintos** metidos como si fueran solo "colores" de un mismo producto (así
+venía del proveedor): "7903black/7903white" a $599 y "A black/A white" a
+$449 — son aparatos con forma distinta, no el mismo aparato en otro color. El
+selector de opciones antes solo mostraba el código del proveedor en texto
+plano ("7903black", "A black"), sin foto ni precio, así que no se notaba la
+diferencia. A petición del usuario ("sé más específico con qué aspiradora
+cuesta menos, separando las fotos"):
+- `sections/mt-producto.liquid`: cuando una opción tiene una foto propia por
+  variante (como este caso), el selector ahora muestra una tarjeta con la
+  **foto real de esa aspiradora + su precio**, no solo el nombre. Si un
+  producto futuro no tiene fotos por variante, se sigue viendo como antes
+  (texto simple) — no rompe nada de lo ya construido.
+- `assets/mt-producto.js`: al elegir una opción, además de actualizar el
+  precio (ya funcionaba), ahora **también cambia la foto grande y la
+  miniatura activa** de la galería para que se vea exactamente el aparato
+  que se está comprando. Comparación por nombre de archivo de imagen (no por
+  ID interno, que no coincide entre la galería y las variantes en la API de
+  Shopify).
+- Probado con una simulación de clic real (no solo lectura de HTML):
+  seleccionar "A black" cambia el precio a $449 y la foto grande a la
+  aspiradora angular correcta.
+- No se inventó ningún nombre de modelo ni característica nueva — se dejaron
+  los mismos valores de opción que trae el proveedor ("7903black", "A
+  black", etc.), solo se les añadió la foto y el precio para que se
+  entiendan mejor.
+
 ## Fases completadas
 - [x] 0 Entorno
 - [x] 1 Conexión (tema + Admin API) y sondeo de producto (no había ninguno)

@@ -58,11 +58,29 @@
 
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
+            {%- assign mt_opt_index = option.position | minus: 1 -%}
             <div class="mt-producto__opcion" {% if option.values.size == 1 %}style="display:none;"{% endif %}>
               <label class="mt-producto__opcion-label">{{ option.name }}</label>
               <div class="mt-producto__pills" data-mt-option="{{ option.position }}">
                 {%- for value in option.values -%}
-                  <button type="button" class="mt-producto__pill {% if value == option.selected_value %}mt-activa{% endif %}" data-value="{{ value | escape }}">{{ value }}</button>
+                  {%- assign mt_value_variant = blank -%}
+                  {%- for variant in product.variants -%}
+                    {%- if variant.options[mt_opt_index] == value -%}
+                      {%- assign mt_value_variant = variant -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if mt_value_variant.featured_image != blank -%}
+                    <button type="button" class="mt-producto__pill mt-producto__pill--foto {% if value == option.selected_value %}mt-activa{% endif %}" data-value="{{ value | escape }}">
+                      <span class="mt-producto__pill-img">
+                        <img src="{{ mt_value_variant.featured_image | image_url: width: 160 }}" alt="{{ value | escape }}" loading="lazy" width="70" height="70">
+                      </span>
+                      <span class="mt-producto__pill-label">{{ value }}</span>
+                      <span class="mt-producto__pill-price">{{ mt_value_variant.price | money }}</span>
+                    </button>
+                  {%- else -%}
+                    <button type="button" class="mt-producto__pill {% if value == option.selected_value %}mt-activa{% endif %}" data-value="{{ value | escape }}">{{ value }}</button>
+                  {%- endif -%}
                 {%- endfor -%}
               </div>
             </div>

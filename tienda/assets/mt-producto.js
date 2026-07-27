@@ -20,6 +20,33 @@ function initGaleria() {
   });
 }
 
+function imageFilename(url) {
+  if (!url) return null;
+  return url.split('?')[0].split('/').pop();
+}
+
+function showMediaForVariant(variant) {
+  if (!variant || !variant.featured_image) return;
+  var mainImg = document.getElementById('mt-main-image');
+  var thumbs = document.querySelectorAll('[data-mt-thumb]');
+  if (!thumbs.length) return;
+
+  var targetFile = imageFilename(variant.featured_image.src);
+  var matchingThumb = null;
+  thumbs.forEach(function (thumb) {
+    if (imageFilename(thumb.dataset.full) === targetFile) {
+      matchingThumb = thumb;
+    }
+  });
+  if (!matchingThumb) return;
+
+  thumbs.forEach(function (t) { t.classList.remove('mt-activa'); });
+  matchingThumb.classList.add('mt-activa');
+  if (mainImg && mainImg.tagName === 'IMG') {
+    mainImg.src = matchingThumb.dataset.full;
+  }
+}
+
 function initVariantes() {
   var form = document.getElementById('mt-producto-form');
   if (!form) return;
@@ -82,6 +109,8 @@ function initVariantes() {
       addButton.disabled = true;
       if (addText) addText.textContent = addButton.dataset.mtLabelAgotado || addText.textContent;
     }
+
+    showMediaForVariant(variant);
   }
 
   if (!optionGroups.length) return;
