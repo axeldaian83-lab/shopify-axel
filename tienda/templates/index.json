@@ -4,15 +4,15 @@
       "type": "mt-hero",
       "settings": {
         "eyebrow": "Nuevo · Tendencia",
-        "headline": "Los gadgets que todo el mundo está buscando",
-        "body": "Productos virales seleccionados a mano, con envío rápido a Estados Unidos, Canadá y México.",
-        "button_text": "Comprar ahora",
-        "button_link": "shopify://collections/all",
-        "button_text_2": "Ver tendencias",
-        "button_link_2": "#tendencia",
-        "badge_text": "Lo más vendido",
+        "headline": "Aspiradora inalámbrica portátil para tu auto",
+        "body": "Succión potente en un diseño compacto e inalámbrico. Ideal para el auto, la casa y la oficina, con envío a Estados Unidos, Canadá y México.",
+        "button_text": "Ver producto",
+        "button_link": "shopify://products/wireless-car-vacuum-cleaner-portable-handheld-high-power-vacuum-cleaner-for-car-home-office-keyboard-cleaning",
+        "button_text_2": "",
+        "button_link_2": "",
+        "badge_text": "Más vendida",
         "color_scheme": "dark",
-        "heading_size": 54,
+        "heading_size": 50,
         "body_size": 18,
         "padding_top": 0,
         "padding_bottom": 40
@@ -21,12 +21,41 @@
     "mt-trust": {
       "type": "mt-trust",
       "blocks": {
-        "envio": { "type": "item", "settings": { "icon": "envio", "texto": "Envío a EE.UU., Canadá y México" } },
-        "seguro": { "type": "item", "settings": { "icon": "seguro", "texto": "Pago 100% seguro" } },
-        "garantia": { "type": "item", "settings": { "icon": "garantia", "texto": "Garantía de 30 días" } },
-        "soporte": { "type": "item", "settings": { "icon": "soporte", "texto": "Atención al cliente rápida" } }
+        "envio": {
+          "type": "item",
+          "settings": {
+            "icon": "envio",
+            "texto": "Envío a EE.UU., Canadá y México"
+          }
+        },
+        "seguro": {
+          "type": "item",
+          "settings": {
+            "icon": "seguro",
+            "texto": "Pago 100% seguro"
+          }
+        },
+        "garantia": {
+          "type": "item",
+          "settings": {
+            "icon": "garantia",
+            "texto": "Garantía de 30 días"
+          }
+        },
+        "soporte": {
+          "type": "item",
+          "settings": {
+            "icon": "soporte",
+            "texto": "Atención al cliente rápida"
+          }
+        }
       },
-      "block_order": ["envio", "seguro", "garantia", "soporte"],
+      "block_order": [
+        "envio",
+        "seguro",
+        "garantia",
+        "soporte"
+      ],
       "settings": {
         "color_scheme": "soft",
         "padding_top": 32,
@@ -36,41 +65,48 @@
     "mt-tendencia": {
       "type": "mt-tendencia",
       "settings": {
-        "eyebrow": "Esta semana",
-        "headline": "Lo más buscado ahora mismo",
+        "eyebrow": "Nuestro catálogo",
+        "headline": "Descubre la aspiradora",
         "link_text": "Ver todo",
         "coleccion": "all",
         "cantidad": 4,
         "columnas": 4,
-        "texto_vacio": "Muy pronto añadiremos aquí los productos más buscados. En cuanto subas tu primer producto, aparecerá automáticamente en este espacio.",
+        "texto_vacio": "Muy pronto añadiremos aquí más productos.",
         "heading_size": 36,
         "padding_top": 80,
         "padding_bottom": 80
       }
     },
-    "mt-cifras": {
-      "type": "mt-cifras",
-      "blocks": {
-        "c1": { "type": "cifra", "settings": { "numero": 10, "sufijo": "k+", "etiqueta": "Clientes felices" } },
-        "c2": { "type": "cifra", "settings": { "numero": 3, "sufijo": "", "etiqueta": "Países con envío" } },
-        "c3": { "type": "cifra", "settings": { "numero": 4, "sufijo": ".8/5", "etiqueta": "Valoración media" } },
-        "c4": { "type": "cifra", "settings": { "numero": 24, "sufijo": "h", "etiqueta": "Envío procesado en" } }
-      },
-      "block_order": ["c1", "c2", "c3", "c4"],
-      "settings": {
-        "color_scheme": "dark",
-        "padding_top": 72,
-        "padding_bottom": 72
-      }
-    },
     "mt-pasos": {
       "type": "mt-pasos",
       "blocks": {
-        "p1": { "type": "paso", "settings": { "titulo": "Haz tu pedido", "texto": "Elige tu producto favorito y paga de forma segura en menos de 1 minuto." } },
-        "p2": { "type": "paso", "settings": { "titulo": "Lo preparamos y enviamos", "texto": "Procesamos tu pedido rápido y te avisamos en cuanto sale hacia EE.UU., Canadá o México." } },
-        "p3": { "type": "paso", "settings": { "titulo": "Disfrútalo en tu puerta", "texto": "Recíbelo en casa y descubre por qué todos hablan de este producto." } }
+        "p1": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Haz tu pedido",
+            "texto": "Elige tu producto favorito y paga de forma segura en menos de 1 minuto."
+          }
+        },
+        "p2": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Lo preparamos y enviamos",
+            "texto": "Procesamos tu pedido y te avisamos en cuanto sale hacia EE.UU., Canadá o México."
+          }
+        },
+        "p3": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Disfrútalo en tu puerta",
+            "texto": "Recíbelo en casa y compruébalo tú mismo."
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
       "settings": {
         "eyebrow": "Cómo funciona",
         "headline": "Pide en 3 pasos, recibe en tu puerta",
@@ -79,49 +115,44 @@
         "padding_bottom": 80
       }
     },
-    "mt-resenas": {
-      "type": "mt-resenas",
-      "blocks": {
-        "r1": { "type": "resena", "settings": { "nombre": "Ana M.", "estrellas": 5, "texto": "Llegó antes de lo esperado y la calidad superó mis expectativas. Repetiré seguro." } },
-        "r2": { "type": "resena", "settings": { "nombre": "Carlos R.", "estrellas": 5, "texto": "El envío a México fue más rápido de lo que pensaba. Muy recomendado." } },
-        "r3": { "type": "resena", "settings": { "nombre": "Jamie T.", "estrellas": 4, "texto": "Muy buena calidad para el precio, volveré a comprar." } }
-      },
-      "block_order": ["r1", "r2", "r3"],
-      "settings": {
-        "eyebrow": "Reseñas",
-        "headline": "Lo que dicen quienes ya compraron",
-        "heading_size": 36,
-        "color_scheme": "soft",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "mt-social": {
-      "type": "mt-social",
-      "blocks": {
-        "s1": { "type": "marca", "settings": { "texto": "TikTok" } },
-        "s2": { "type": "marca", "settings": { "texto": "Instagram" } },
-        "s3": { "type": "marca", "settings": { "texto": "YouTube" } },
-        "s4": { "type": "marca", "settings": { "texto": "Facebook" } },
-        "s5": { "type": "marca", "settings": { "texto": "Tendencia" } }
-      },
-      "block_order": ["s1", "s2", "s3", "s4", "s5"],
-      "settings": {
-        "headline": "Como se ve en",
-        "color_scheme": "soft",
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
-    },
     "mt-faq": {
       "type": "mt-faq",
       "blocks": {
-        "f1": { "type": "pregunta", "settings": { "pregunta": "¿A qué países envían?", "respuesta": "<p>Enviamos a Estados Unidos, Canadá y México.</p>" } },
-        "f2": { "type": "pregunta", "settings": { "pregunta": "¿Cuánto tarda el envío?", "respuesta": "<p>Normalmente entre 5 y 10 días laborables, según tu ubicación.</p>" } },
-        "f3": { "type": "pregunta", "settings": { "pregunta": "¿Puedo devolver mi pedido?", "respuesta": "<p>Sí, tienes 30 días desde la recepción para solicitar una devolución.</p>" } },
-        "f4": { "type": "pregunta", "settings": { "pregunta": "¿Qué métodos de pago aceptan?", "respuesta": "<p>Aceptamos las principales tarjetas y métodos de pago seguros disponibles en el checkout.</p>" } }
+        "f1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿A qué países envían?",
+            "respuesta": "<p>Enviamos a Estados Unidos, Canadá y México.</p>"
+          }
+        },
+        "f2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cuánto tarda el envío?",
+            "respuesta": "<p>Normalmente entre 5 y 10 días laborables, según tu ubicación.</p>"
+          }
+        },
+        "f3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Puedo devolver mi pedido?",
+            "respuesta": "<p>Sí, tienes 30 días desde la recepción para solicitar una devolución.</p>"
+          }
+        },
+        "f4": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué métodos de pago aceptan?",
+            "respuesta": "<p>Aceptamos las principales tarjetas y métodos de pago seguros disponibles en el checkout.</p>"
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
       "settings": {
         "eyebrow": "Dudas frecuentes",
         "headline": "Todo lo que necesitas saber",
@@ -134,10 +165,10 @@
     "mt-cta-final": {
       "type": "mt-cta-final",
       "settings": {
-        "headline": "No te quedes fuera de la tendencia",
-        "body": "Envíos a Estados Unidos, Canadá y México. Compra hoy y recíbelo en tu puerta.",
+        "headline": "Consigue tu aspiradora inalámbrica",
+        "body": "Envíos a Estados Unidos, Canadá y México. Compra hoy y recíbela en tu puerta.",
         "button_text": "Comprar ahora",
-        "button_link": "shopify://collections/all",
+        "button_link": "shopify://products/wireless-car-vacuum-cleaner-portable-handheld-high-power-vacuum-cleaner-for-car-home-office-keyboard-cleaning",
         "heading_size": 42,
         "padding_top": 96,
         "padding_bottom": 96
@@ -148,10 +179,7 @@
     "mt-hero",
     "mt-trust",
     "mt-tendencia",
-    "mt-cifras",
     "mt-pasos",
-    "mt-resenas",
-    "mt-social",
     "mt-faq",
     "mt-cta-final"
   ]

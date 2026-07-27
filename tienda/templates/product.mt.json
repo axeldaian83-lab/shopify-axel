@@ -3,8 +3,8 @@
     "principal": {
       "type": "mt-producto",
       "blocks": {
-        "c1": { "type": "caracteristica", "settings": { "titulo": "Calidad probada", "texto": "Materiales seleccionados para que dure y funcione como esperas." } },
-        "c2": { "type": "caracteristica", "settings": { "titulo": "Envío rápido", "texto": "Procesamos y enviamos tu pedido en menos de 24 horas." } },
+        "c1": { "type": "caracteristica", "settings": { "titulo": "Materiales seleccionados", "texto": "Carcasa resistente y batería recargable pensadas para el uso diario." } },
+        "c2": { "type": "caracteristica", "settings": { "titulo": "Envío internacional", "texto": "Enviamos a Estados Unidos, Canadá y México con seguimiento incluido." } },
         "c3": { "type": "caracteristica", "settings": { "titulo": "Soporte real", "texto": "Si algo no va bien, tienes a alguien real para ayudarte." } }
       },
       "block_order": ["c1", "c2", "c3"],
@@ -16,24 +16,7 @@
         "confianza_2": "Pago 100% seguro",
         "confianza_3": "Garantía de 30 días",
         "incluye_titulo": "Qué incluye",
-        "incluye": "1x producto principal\n1x manual rápido\nEmpaque protegido para envío internacional"
-      }
-    },
-    "resenas": {
-      "type": "mt-resenas",
-      "blocks": {
-        "r1": { "type": "resena", "settings": { "nombre": "Ana M.", "estrellas": 5, "texto": "Llegó antes de lo esperado y la calidad superó mis expectativas. Repetiré seguro." } },
-        "r2": { "type": "resena", "settings": { "nombre": "Carlos R.", "estrellas": 5, "texto": "El envío a México fue más rápido de lo que pensaba. Muy recomendado." } },
-        "r3": { "type": "resena", "settings": { "nombre": "Jamie T.", "estrellas": 4, "texto": "Muy buena calidad para el precio, volveré a comprar." } }
-      },
-      "block_order": ["r1", "r2", "r3"],
-      "settings": {
-        "eyebrow": "Reseñas",
-        "headline": "Lo que dicen quienes ya compraron",
-        "heading_size": 32,
-        "color_scheme": "soft",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "incluye": "1x aspiradora inalámbrica"
       }
     },
     "faq": {
@@ -52,7 +35,20 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
+    },
+    "recomendados": {
+      "type": "mt-recomendados",
+      "settings": {
+        "eyebrow": "También te puede interesar",
+        "headline": "Más de nuestra tienda",
+        "coleccion": "all",
+        "cantidad": 4,
+        "columnas": 4,
+        "heading_size": 32,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
-  "order": ["principal", "resenas", "faq"]
+  "order": ["principal", "faq", "recomendados"]
 }

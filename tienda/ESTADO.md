@@ -71,6 +71,64 @@
   Canadá CAD, México MXN) — confirmado funcionando en el selector del pie de
   página. Resuelto, ya no está pendiente.
 
+## Actualización 2026-07-27 — limpieza de catálogo y de contenido
+A petición explícita del usuario ("elimina todos los productos menos las
+aspiradoras de carro... quites información falsa o que puesa parecer
+engañosa"):
+- **Catálogo reducido a 1 producto.** Se eliminaron de Shopify el "Gel
+  Antibacterial de Bolsillo en Spray" y el "Vaso Termo Gigante de Acero
+  Inoxidable 40oz" (`productDelete`). Solo queda la **Aspiradora Inalámbrica
+  Portátil para Auto** (gid://shopify/Product/8520477933759).
+- **Contenido potencialmente engañoso eliminado por completo**:
+  - Sección `mt-cifras` (cifras de clientes/valoraciones inventadas) —
+    borrada de `templates/index.json` y quitada del layout global.
+  - Sección `mt-resenas` (reseñas de clientes ficticios) — borrada.
+  - Sección `mt-social` (falso "as seen on" con logos de TikTok/Instagram/
+    YouTube/Facebook que la tienda nunca reclamó de verdad) — borrada.
+  - Afirmación no verificada "envío en 24 horas" — quitada de las
+    características del producto (`product.mt.json` bloque `c2`, ahora dice
+    solo "enviamos... con seguimiento incluido", sin plazo inventado).
+  - Afirmación no verificada "incluye manual" en "Qué incluye" — el listado
+    real del proveedor solo confirma la aspiradora, así que ahora dice
+    únicamente "1x aspiradora inalámbrica".
+  - Los tres bloques de características (`c1`/`c2`/`c3`) se reescribieron
+    para describir solo lo que el producto real tiene (materiales, envío
+    internacional, soporte), sin cifras ni promesas no verificadas.
+  Nada de esto se "adivinó": solo se dejó lo que el propio listado del
+  proveedor confirma.
+- **Nueva sección "También te puede interesar" (`sections/mt-recomendados.liquid`)**,
+  añadida a la página de producto (`templates/product.mt.json`). Muestra
+  hasta 4 productos de la colección "all" que NO sean el que se está viendo.
+  Con un solo producto en la tienda hoy, la sección **no se muestra en
+  absoluto** (queda oculta automáticamente, sin hueco vacío ni error) —
+  en cuanto el usuario añada un segundo producto a la colección "all",
+  aparecerá sola mostrándolo, sin tocar código.
+- **Corrección de enlaces internos**: los botones del hero y del CTA final de
+  la portada (`templates/index.json`) usaban una ruta fija
+  (`/products/...`) que rompía el idioma al hacer clic desde `/en-us/` o
+  `/en-ca/` (mandaba de vuelta a la versión en español). Se cambiaron al
+  esquema interno `shopify://products/...`, igual que ya se hacía con los
+  enlaces a colecciones — verificado con curl que desde cada idioma el botón
+  se queda en su propio idioma.
+- **Traducción al inglés puesta al día**: se registraron 58 traducciones
+  nuevas/actualizadas vía `translationsRegister` (tema
+  `gid://shopify/OnlineStoreTheme/153953042623`) para que `/en-us/` y
+  `/en-ca/` reflejen todo el contenido corregido (portada sin las 3
+  secciones borradas, página de producto con el "incluye" y las
+  características corregidas, textos de la nueva sección de recomendados).
+  Verificado con curl en las 3 rutas (raíz, `/en-us/`, `/en-ca/`): idioma,
+  precio convertido y enlaces correctos en cada una.
+- **Dos bugs reportados por el usuario, corregidos** (antes de esta limpieza,
+  durante la misma sesión de trabajo):
+  1. El acordeón de preguntas frecuentes no respondía al primer clic — la
+     causa era que `mt-scripts.js` se cargaba una vez por cada sección que lo
+     necesitaba, duplicando los listeners de clic. Se dejó una sola carga
+     global en `layout/theme.liquid`.
+  2. El precio no cambiaba al elegir otro color/variante — el precio vivía
+     fuera del `<form>` que buscaba el script. Se corrigió
+     `assets/mt-producto.js` para buscar el precio dentro del bloque de
+     compra completo, no solo dentro del formulario.
+
 ## Fases completadas
 - [x] 0 Entorno
 - [x] 1 Conexión (tema + Admin API) y sondeo de producto (no había ninguno)
@@ -105,29 +163,41 @@
   guía, 100% sustituible desde el editor (image_picker) sin tocar código.
 
 ### Estructura de portada (templates/index.json)
-1. `mt-hero` — hero oscuro con claim, 2 CTAs y foto de producto (placeholder)
+Actualizada 2026-07-27 — se quitaron `mt-cifras`, `mt-resenas` y `mt-social`
+por contener cifras/reseñas/menciones no reales (ver sección de limpieza más
+arriba). Estructura actual:
+1. `mt-hero` — hero oscuro con claim, CTA y foto de producto (placeholder)
 2. `mt-trust` — banda de confianza (envío 3 países, pago seguro, garantía, soporte)
-3. `mt-tendencia` — grid de la colección "all" (vacío hasta que haya productos)
-4. `mt-cifras` — 4 cifras animadas al hacer scroll
-5. `mt-pasos` — cómo funciona en 3 pasos
-6. `mt-resenas` — carrusel de reseñas con navegación
-7. `mt-social` — marquesina "As seen on" (TikTok/Instagram/YouTube/Facebook)
-8. `mt-faq` — acordeón de preguntas frecuentes (envíos/devoluciones/pagos)
-9. `mt-cta-final` — llamada final a la acción
+3. `mt-tendencia` — grid de la colección "all" (muestra el/los productos reales)
+4. `mt-pasos` — cómo funciona en 3 pasos
+5. `mt-faq` — acordeón de preguntas frecuentes (envíos/devoluciones/pagos)
+6. `mt-cta-final` — llamada final a la acción
+
+### Estructura de la página de producto (templates/product.mt.json)
+1. `principal` (`mt-producto`) — galería, precio, variantes, qué incluye,
+   características
+2. `faq` (`mt-faq`) — preguntas frecuentes específicas antes de comprar
+3. `recomendados` (`mt-recomendados`, nueva 2026-07-27) — "También te puede
+   interesar"; se oculta sola si no hay más productos que el actual
 
 ## Secciones creadas (todas con prefijo `mt-`, 100% editables desde el editor)
 - `sections/mt-hero.liquid`
 - `sections/mt-trust.liquid`
 - `sections/mt-tendencia.liquid`
-- `sections/mt-cifras.liquid`
 - `sections/mt-pasos.liquid`
-- `sections/mt-resenas.liquid`
-- `sections/mt-social.liquid`
 - `sections/mt-faq.liquid`
 - `sections/mt-cta-final.liquid`
 - `sections/mt-producto.liquid` (página de producto completa: galería con
   miniaturas, precio dinámico, selector de variantes en JS, fila de confianza,
   "qué incluye", descripción, características)
+- `sections/mt-recomendados.liquid` (2026-07-27, "También te puede interesar"
+  en la página de producto; se oculta sola si no hay más productos)
+- `sections/mt-cifras.liquid`, `sections/mt-resenas.liquid`,
+  `sections/mt-social.liquid` — **archivos aún existen en el tema pero ya no
+  se usan en ninguna plantilla** desde el 2026-07-27 (se quitaron de
+  `templates/index.json` por contener cifras/reseñas/menciones no reales).
+  Se pueden borrar del todo cuando el usuario lo confirme; se dejaron por si
+  prefiere reciclarlos más adelante con datos reales.
 - `sections/footer-group.json` reconfigurado (marca + enlaces + políticas +
   iconos de pago, sin newsletter)
 - `layout/theme.liquid`: favicon provisional añadido (única edición fuera de
@@ -160,8 +230,10 @@
    (Contenido → Páginas), avisando de que son una base y no asesoría legal.
 4. Subir su logo cuando lo tenga (Configuración del tema → Logo/Favicon) —
    nada de código que tocar.
-5. Crear su primer producto (Productos → Añadir producto) y avisar para que le
-   asigne automáticamente la plantilla `mt` y le pula los textos del catálogo.
+5. Cuando cree un segundo producto (Productos → Añadir producto), avisar para
+   asignarle automáticamente la plantilla `mt`, pulir sus textos y traducirlo
+   — en cuanto exista, la sección "También te puede interesar" de la página
+   de producto lo mostrará sola, sin tocar código.
 6. Si quiere un menú de pie de página con enlaces propios, crear un menú con
    handle "footer" en Contenido → Menús (el bloque ya está enganchado a ese
    handle; si no existe, simplemente no se muestra esa columna, no rompe nada).
